@@ -1,0 +1,10 @@
+body {
+  background: #000405;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: 'Press Start 2P', cursive;
+  font-weight: 900;
+}
