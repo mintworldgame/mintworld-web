@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/mintworld-web/static/css/main.87ef0f69.css",
+    "main.js": "/mintworld-web/static/js/main.ba365d16.js",
+    "index.html": "/mintworld-web/index.html",
+    "main.87ef0f69.css.map": "/mintworld-web/static/css/main.87ef0f69.css.map",
+    "main.ba365d16.js.map": "/mintworld-web/static/js/main.ba365d16.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.87ef0f69.css",
+    "static/js/main.ba365d16.js"
+  ]
+}
