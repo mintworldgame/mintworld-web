@@ -1,6 +1,6 @@
 {
     "name": "sarkpk-web",
-    "homepage": "http://ngmisl.github.io/whattheduck",
+    "homepage": "http://mintworldgame.github.io/mintworld-web",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
