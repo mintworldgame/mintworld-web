@@ -1,0 +1,61 @@
+/* @import url(' https://fonts.google.com/specimen/Press+Start+2P?preview.text_type=custom&query=press+start+2p#type-tester'); */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
+/* {
+    font-family: 'Press Start 2P', cursive;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} */
+* {
+    font-family: 'JetBrains Mono', monospace;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: black;
+    color: #98ff98;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.social-link {
+    color: #fff;
+}
+.social-link:hover {
+    color: #98ff98;
+}
+
+.main-text {
+    color: #98ff98;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 50px;
+    line-height: 1.6;
+}
+
+.main-font {
+    color: #98ff98;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.about-text {
+    font-size: 40;
+}
+
+.about-p {
+    font-size: 20px;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.main-image {
+    text-align: right;
+}
