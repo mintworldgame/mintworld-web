@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/mintworld-web/static/css/main.87ef0f69.css",
-    "main.js": "/mintworld-web/static/js/main.ba365d16.js",
-    "index.html": "/mintworld-web/index.html",
-    "main.87ef0f69.css.map": "/mintworld-web/static/css/main.87ef0f69.css.map",
-    "main.ba365d16.js.map": "/mintworld-web/static/js/main.ba365d16.js.map"
+    "main.css": "/static/css/main.87ef0f69.css",
+    "main.js": "/static/js/main.ba365d16.js",
+    "index.html": "/index.html",
+    "main.87ef0f69.css.map": "/static/css/main.87ef0f69.css.map",
+    "main.ba365d16.js.map": "/static/js/main.ba365d16.js.map"
   },
   "entrypoints": [
     "static/css/main.87ef0f69.css",
