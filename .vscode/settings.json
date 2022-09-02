@@ -4,5 +4,22 @@
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
     "editor.wordWrap": "on",
-    "cSpell.words": ["ethlogo", "Firery", "isloaded", "Lavagron", "mintie", "Mintiephrase", "mintpowered", "noreferrer", "polygonlogo", "predeploy", "sarkpk", "webfonts", "webgl", "Windry", "Wingron"]
+    "cSpell.words": [
+        "ethlogo",
+        "Firery",
+        "isloaded",
+        "Lavagron",
+        "mintie",
+        "Mintiephrase",
+        "mintpowered",
+        "noreferrer",
+        "polygonlogo",
+        "predeploy",
+        "sarkpk",
+        "Testv",
+        "webfonts",
+        "webgl",
+        "Windry",
+        "Wingron"
+    ]
 }
