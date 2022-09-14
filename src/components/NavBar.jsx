@@ -40,6 +40,11 @@ const NavBar = () => {
                             </Link>
                         </li>
                         <li className="nav-item">
+                            <a href="https://mwg-0awkd.spheron.app/" target="_blank" smooth={true} duration={500} className="nav-link" style={{ color: '#98ff98', cursor: 'pointer' }}>
+                                Names
+                            </a>
+                        </li>
+                        <li className="nav-item">
                             <Link to="community" smooth={true} duration={500} className="nav-link" style={{ color: '#98ff98', cursor: 'pointer' }}>
                                 Community
                             </Link>
