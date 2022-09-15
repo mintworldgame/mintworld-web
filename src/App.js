@@ -62,7 +62,7 @@ function App() {
             <div className="container-fluid">
                 <div className="row py-2 py-lg-5 play">
                     <div className="col-lg-12 py-4 d-flex justify-content-center">
-                        <h2 className="main-font">Play MintWorld v0 (Polygon)</h2>
+                        <h2 className="main-font">Play MintWorld v0</h2>
                     </div>
                     <div className="col-lg-12 py-4 d-flex justify-content-center">
                         <UnityDummy />
