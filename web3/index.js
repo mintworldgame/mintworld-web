@@ -1,269 +1,255 @@
-// Load web3modal to connect to wallet
-document.body.appendChild(Object.assign(document.createElement("script"), {
-    type: "text/javascript",
-    src: "./web3/lib/web3modal.js"
-}));
-// Load web3js to create transactions
-document.body.appendChild(Object.assign(document.createElement("script"), {
-    type: "text/javascript",
-    src: "./web3/lib/web3.min.js"
-}));
+// load network.js to get network/chain id
+document.body.appendChild(Object.assign(document.createElement("script"), { type: "text/javascript", src: "./network.js" }));
+// load web3modal to connect to wallet
+document.body.appendChild(Object.assign(document.createElement("script"), { type: "text/javascript", src: "./web3/lib/web3modal.js" }));
+// load web3js to create transactions
+document.body.appendChild(Object.assign(document.createElement("script"), { type: "text/javascript", src: "./web3/lib/web3.min.js" }));
+// uncomment to enable torus wallet
+// document.body.appendChild(Object.assign(document.createElement("script"), { type: "text/javascript", src: "https://unpkg.com/@toruslabs/torus-embed" }));
+// uncomment to enable walletconnect
+// document.body.appendChild(Object.assign(document.createElement("script"), { type: "text/javascript", src: "https://unpkg.com/@walletconnect/web3-provider@1.2.1/dist/umd/index.min.js" }));
 
-window.web3ChainId = 1;
-
-let provider;
-let web3;
-
-// Define web3gl to unity interface
+// load web3gl to connect to unity
 window.web3gl = {
     networkId: 0,
-    debugMode: false,
     connect,
     connectAccount: "",
     signMessage,
     signMessageResponse: "",
+    callContract,
+    callContractResponse:"",
+    callContractError:"",
     sendTransaction,
     sendTransactionResponse: "",
+    sha3Message,
+    hashMessageResponse: "",
+    sendTransactionResponse: "",
+    sendTransactionData,
+    sendTransactionResponseData:"",
     sendContract,
     sendContractResponse: "",
 };
 
-// Define Live Queries
-window.moralisLiveQueries = {
-    requestId: 0,
-    webSockets: {},
-    openSocket,
-    openSocketResponse: "",
-    closeSocket,
-    closeSocketResponse: "",
-    sendRequest,
-    getErrors,
-    getMessages,
-    getSocketState
-};
-
-
-async function openSocket(key, path) {
-    return new Promise((resolve, reject) => {
-        let reqId = window.moralisLiveQueries.requestId++;
-        let ws = {
-            socketUrl: path,
-            requestId: reqId,
-            socket: null,
-            messages: [],
-            errors: [],
-            onmessage: function (data) {
-                var msg = JSON.stringify(data.data);
-                console.log('onmessage: ' + msg);
-                ws.messages.push(data.data);
-            },
-            onerror: function (data) {
-                var msg = JSON.stringify(data.data);
-                console.log('onerror: ' + msg);
-                ws.errors.push(data.data);
-
-            }
-        };
-
-        ws.socket = new WebSocket(path);
-
-        ws.socket.onmessage = ws.onmessage;
-
-        ws.socket.onopen = function (e) {
-            var msg = JSON.stringify(e);
-
-            window.moralisLiveQueries.openSocketResponse = msg;
-            // Resolve the promise - we are connected
-            resolve();
-        };
-
-        ws.socket.onclose = function (event) {
-            if (event.wasClean) {
-                window.moralisLiveQueries.closeSocketResponse = event; //`[${key} close] Connection closed cleanly, code=${event.code} reason=${event.reason}`;
-            } else {
-                // e.g. server process killed or network down
-                // event.code is usually 1006 in this case
-                window.moralisLiveQueries.closeSocketResponse = `[${key} close] Connection died`;
-            }
-        };
-
-        window.moralisLiveQueries.webSockets[key] = ws;
-    });
-}
-
-function getSocketState(key) {
-    var state = 3; // default to closed.
-    if (window.moralisLiveQueries.webSockets[key]) {
-        state = window.moralisLiveQueries.webSockets[key].socket.readyState;
-    }
-    return state;
-}
-
-function closeSocket(key) {
-    if (window.moralisLiveQueries.webSockets[key]) {
-        window.moralisLiveQueries.webSockets[key].socket.close();
-    }
-}
-
-function sendRequest(key, msg) {
-    if (window.moralisLiveQueries.webSockets[key]) {
-        window.moralisLiveQueries.webSockets[key].socket.send(msg);
-    }
-}
-
-// Get any messages in the message queue of websoket key.
-function getMessages(key) {
-    var resp = [];
-
-    if (window.moralisLiveQueries.webSockets[key]) {
-        resp = [...window.moralisLiveQueries.webSockets[key].messages];
-        window.moralisLiveQueries.webSockets[key].messages = [];
-    }
-
-    return resp;
-}
-
-// Get any errors in the error queue of websoket key.
-function getErrors(key) {
-    var resp = [];
-
-    if (window.moralisLiveQueries.webSockets[key]) {
-        resp = [...window.moralisLiveQueries.webSockets[key].errors];
-        window.moralisLiveQueries.webSockets[key].errors = [];
-    }
-
-    return resp;
-}
-
-// END Moralis WebSocket -----------------------------------------------------
+// will be defined after connect()
+let provider;
+let web3;
 
 /*
-Establish connection to web3.
+paste this in inspector to connect to wallet:
+window.web3gl.connect()
 */
-async function connect(appLogo, appTitle, appDesc) {
+async function connect() {
+  // uncomment to enable torus and walletconnect
+  const providerOptions = {
+    // torus: {
+    //   package: Torus,
+    // },
+    // walletconnect: {
+    //   package: window.WalletConnectProvider.default,
+    //   options: {
+    //     infuraId: "00000000000000000000000000000000",
+    //   },
+    // },
+  };
 
-    const providerOptions = {
-        injected: {
-            display: {
-                logo: appLogo,
-                name: appTitle,
-                description: appDesc
-            },
-            package: null
-        }
-    };
+  const web3Modal = new window.Web3Modal.default({
+    providerOptions,
+  });
 
-    const web3Modal = new window.Web3Modal.default({
-        providerOptions,
-    });
+  web3Modal.clearCachedProvider();
 
-    web3Modal.clearCachedProvider();
+  // set provider
+  provider = await web3Modal.connect();
+  web3 = new Web3(provider);
 
-    // Create a provider
+  // set current network id
+  web3gl.networkId = parseInt(provider.chainId);
+
+  // if current network id is not equal to network id, then switch
+  if (web3gl.networkId != window.web3ChainId) {
     try {
-        provider = await web3Modal.connect();
-    } catch(e) {
-        // Could not get a wallet connection
-        web3gl.connectAccount = "false";
-        return;
+      await window.ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: `0x${window.web3ChainId.toString(16)}` }], // chainId must be in hexadecimal numbers
+      });
+    } catch {
+      // if network isn't added, pop-up metamask to add
+      await addEthereumChain();
     }
-    
-    // Instantiate Web3
-    web3 = new Web3(provider);
+  }
 
-    // Set network id from the connected provider.
-    web3gl.networkId = parseInt(provider.chainId);
+  // set current account
+  // provider.selectedAddress works for metamask and torus
+  // provider.accounts[0] works for walletconnect
+  web3gl.connectAccount = provider.selectedAddress || provider.accounts[0];
 
-    // Set system chain id
-    if (web3gl.networkId != window.web3ChainId) {
-        window.web3ChainId = web3gl.networkId;
-    }
+  // refresh page if player changes account
+  provider.on("accountsChanged", (accounts) => {
+    window.location.reload();
+  });
 
-    // Set the current account from the provider.
-    web3gl.connectAccount = provider.selectedAddress;
-
-    // If the account has changed, reload the page.
-    provider.on("accountsChanged", (accounts) => {
-        window.location.reload();
-    });
-
-    // Update chain id if player changes network.
-    provider.on("chainChanged", (chainId) => {
-        web3gl.networkId = parseInt(chainId);
-    });
+  // update if player changes network
+  provider.on("chainChanged", (chainId) => {
+    web3gl.networkId = parseInt(chainId);
+  });
 }
 
 /*
-Implement sign message
+Will calculate the sha3 of the input.
+window.web3gl.sha3Message("hello")
+*/
+async function sha3Message(message) {
+    try {
+        const hashedMessage = await web3.utils.sha3(message);
+        window.web3gl.hashMessageResponse = hashedMessage;
+    } catch (error) {
+        window.web3gl.hashMessageResponse = error.message;
+    }
+}
+
+/*
+paste this in inspector to connect to sign message:
+window.web3gl.signMessage("hello")
 */
 async function signMessage(message) {
-    try {
-        const from = (await web3.eth.getAccounts())[0];
-
-        log('signMessage: message: ' + message);
-
-        const signature = await web3.eth.personal.sign(message, from, "");
-        window.web3gl.signMessageResponse = signature;
-        log('signMessage: signature: ' + signature);
-    } catch (error) {
-        window.web3gl.signMessageResponse = error.message;
-        log('signMessage: error: ' + error.message);
-    }
+  try {
+    const from = (await web3.eth.getAccounts())[0];
+    const signature = await web3.eth.personal.sign(message, from, "")
+      window.web3gl.signMessageResponse = signature;
+  } catch (error) {
+    window.web3gl.signMessageResponse = error.message;
+  }
 }
 
 /*
-Implement send transaction
+paste this in inspector to send eth:
+const to = "0xdD4c825203f97984e7867F11eeCc813A036089D1"
+const value = "12300000000000000"
+const gasLimit = "21000" // gas limit
+const gasPrice = "33333333333"
+window.web3gl.sendTransaction(to, value, gasLimit, gasPrice);
 */
 async function sendTransaction(to, value, gasLimit, gasPrice) {
+  const from = (await web3.eth.getAccounts())[0];
+  web3.eth
+      .sendTransaction({
+        from,
+        to,
+        value,
+        gas: gasLimit ? gasLimit : undefined,
+        gasPrice: gasPrice ? gasPrice : undefined,
+      })
+      .on("transactionHash", (transactionHash) => {
+        window.web3gl.sendTransactionResponse = transactionHash;
+      })
+      .on("error", (error) => {
+        window.web3gl.sendTransactionResponse = error.message;
+      });
+}
+
+/*
+paste this in inspector to send eth:
+const to = "0x20E7D0C4182149ADBeFE446E82358A2b2D5244e9"
+const value = "0"
+const gasPrice = "1100000010"
+const gasLimit = "228620" // gas limit
+const data = "0xd0def521000000000000000000000000d25b827d92b0fd656a1c829933e9b0b836d5c3e20000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000002e516d586a576a6a4d55387233395543455a38343833614e6564774e5246524c767656396b7771314770436774686a000000000000000000000000000000000000"
+window.web3gl.sendTransactionData(to, value, gasPrice, gasLimit, data);
+*/
+async function sendTransactionData(to, value, gasPrice, gasLimit, data) {
     const from = (await web3.eth.getAccounts())[0];
-
-    log('sendTransaction to: ' + to + ' value: ' + value + ' gasLimit: ' + gasLimit + ' gasPrice: ' + gasPrice);
-
     web3.eth
         .sendTransaction({
             from,
             to,
             value,
-            gas: gasLimit ? gasLimit : undefined,
             gasPrice: gasPrice ? gasPrice : undefined,
+            gas: gasLimit ? gasLimit : undefined,
+            data: data ? data : undefined,
         })
         .on("transactionHash", (transactionHash) => {
-            window.web3gl.sendTransactionResponse = transactionHash;
-            log('sendTransaction: txnHash: ' + transactionHash);
+            window.web3gl.sendTransactionResponseData = transactionHash;
         })
         .on("error", (error) => {
-            window.web3gl.sendTransactionResponse = error.message;
-            log('sendTransaction: error: ' + error.message);
+            window.web3gl.sendTransactionResponseData = error.message;
         });
 }
 
 /*
-Implement send contract
+calls a non-mutable contract method.
+const method = "x"
+const abi = `[ { "inputs": [], "name": "increment", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "x", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function" } ]`;
+const contract = "0xB6B8bB1e16A6F73f7078108538979336B9B7341C"
+const args = "[]"
+window.web3gl.callContract(method, abi, contract, args)
 */
-async function sendContract(method, abi, contract, args, value, gasLimit, gasPrice) {
+async function callContract(method, abi, contract, args) {
     const from = (await web3.eth.getAccounts())[0];
-
-    log('sendContract method: ' + method + ' value: ' + value + ' gasLimit: ' + gasLimit + ' gasPrice: ' + gasPrice + ' args: ' + args);
-
-    new web3.eth.Contract(JSON.parse(abi), contract).methods[method](...JSON.parse(args))
-        .send({
-            from,
-            value,
-            gas: gasLimit ? gasLimit : undefined,
-            gasPrice: gasPrice ? gasPrice : undefined,
-        })
-        .on("transactionHash", (transactionHash) => {
-            window.web3gl.sendContractResponse = transactionHash;
-            log('sendContract: txnHash: ' + transactionHash);
-        })
-        .on("error", (error) => {
-            window.web3gl.sendContractResponse = error.message;
-            log('sendContract: error: ' + error.message);
-        });
+    new web3.eth.Contract(JSON.parse(abi), contract).methods[method](
+        ...JSON.parse(args)
+    ).call()
+        .then((result) => window.web3gl.callContractResponse = result)
+        .catch((error) => window.web3gl.callContractError = error.message);
 }
 
-function log(msg) {
-    if (window.web3gl.debugMode) {
-        console.log("web3gl: " + msg);
-    }
+/*
+paste this in inspector to connect to interact with contract:
+const method = "increment"
+const abi = `[ { "inputs": [], "name": "increment", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "x", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function" } ]`;
+const contract = "0xB6B8bB1e16A6F73f7078108538979336B9B7341C"
+const args = "[]"
+const value = "0"
+const gasLimit = "222222" // gas limit
+const gasPrice = "333333333333"
+window.web3gl.sendContract(method, abi, contract, args, value, gasLimit, gasPrice)
+*/
+async function sendContract(method, abi, contract, args, value, gasLimit, gasPrice) {
+  const from = (await web3.eth.getAccounts())[0];
+  new web3.eth.Contract(JSON.parse(abi), contract).methods[method](...JSON.parse(args))
+      .send({
+        from,
+        value,
+        gas: gasLimit ? gasLimit : undefined,
+        gasPrice: gasPrice ? gasPrice : undefined,
+      })
+      .on("transactionHash", (transactionHash) => {
+        window.web3gl.sendContractResponse = transactionHash;
+      })
+      .on("error", (error) => {
+        window.web3gl.sendContractResponse = error.message;
+      });
+}
+
+// add new wallet to in metamask
+async function addEthereumChain() {
+  const account = (await web3.eth.getAccounts())[0];
+
+  // fetch https://chainid.network/chains.json
+  const response = await fetch("https://chainid.network/chains.json");
+  const chains = await response.json();
+
+  // find chain with network id
+  const chain = chains.find((chain) => chain.chainId == window.web3ChainId);
+
+  const params = {
+    chainId: "0x" + chain.chainId.toString(16), // A 0x-prefixed hexadecimal string
+    chainName: chain.name,
+    nativeCurrency: {
+      name: chain.nativeCurrency.name,
+      symbol: chain.nativeCurrency.symbol, // 2-6 characters long
+      decimals: chain.nativeCurrency.decimals,
+    },
+    rpcUrls: chain.rpc,
+    blockExplorerUrls: [chain.explorers && chain.explorers.length > 0 && chain.explorers[0].url ? chain.explorers[0].url : chain.infoURL],
+  };
+
+  await window.ethereum
+      .request({
+        method: "wallet_addEthereumChain",
+        params: [params, account],
+      })
+      .catch(() => {
+        // I give up
+        window.location.reload();
+      });
 }
