@@ -40,6 +40,11 @@ const NavBar = () => {
                             </Link>
                         </li>
                         <li className="nav-item">
+                            <a href="https://mintworld-1.gitbook.io/docs/" target="_blank" smooth={true} duration={500} className="nav-link" style={{ color: '#98ff98', cursor: 'pointer' }}>
+                                Docs
+                            </a>
+                        </li>
+                        <li className="nav-item">
                             <a href="https://mwg-0awkd.spheron.app/" target="_blank" smooth={true} duration={500} className="nav-link" style={{ color: '#98ff98', cursor: 'pointer' }}>
                                 Names
                             </a>
