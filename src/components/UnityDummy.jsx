@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import Unity, { UnityContext } from 'react-unity-webgl';
+import { AiOutlineAndroid } from 'react-icons/ai';
 
 const unityContext = new UnityContext({
     loaderUrl: 'build/FinalTestv4.loader.js',
@@ -23,6 +24,9 @@ const UnityDummy = () => {
 
     return (
         <div>
+            <a button type="button" href="https://github.com/mintworldgame/mwg-mobile" target="_blank" rel="noreferrer" class="btn btn-outline-info">
+                <AiOutlineAndroid /> Android Version
+            </a>
             <p style={{ visibility: `${isloaded ? 'hidden' : 'visible'}` }} className="text-center">{`Loading... ${progression * 100}%`}</p>
             <Unity style={{ width: '960px', height: '600px', visibility: `${isloaded ? 'visible' : 'hidden'}` }} unityContext={unityContext} />
         </div>
