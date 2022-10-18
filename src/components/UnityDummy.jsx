@@ -24,7 +24,7 @@ const UnityDummy = () => {
 
     return (
         <div>
-            <a button type="button" href="https://github.com/mintworldgame/mwg-mobile" target="_blank" rel="noreferrer" class="btn btn-outline-info">
+            <a button type="button" href="https://play.google.com/store/apps/details?id=com.MintWorld.MintWorld" target="_blank" rel="noreferrer" class="btn btn-outline-info">
                 <AiOutlineAndroid /> Android Version
             </a>
             <p style={{ visibility: `${isloaded ? 'hidden' : 'visible'}` }} className="text-center">{`Loading... ${progression * 100}%`}</p>

@@ -41,7 +41,7 @@ const NavBar = () => {
                         </li>
                         <li className="nav-item">
                             <a
-                                href="https://github.com/mintworldgame/mwg-mobile"
+                                href="https://play.google.com/store/apps/details?id=com.MintWorld.MintWorld"
                                 target="_blank"
                                 rel="noreferrer"
                                 smooth={true}
