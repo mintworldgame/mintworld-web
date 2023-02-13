@@ -1,0 +1,125 @@
+---
+import "../assets/scss/globals.scss";
+import SiteMeta from "../components/SiteMeta.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const {
+  title = "MintWorldGame",
+  description = "MintWorld is a 2D, web3 based Monster Catching RPG",
+  url,
+  image = "/social-preview-image.png",
+} = Astro.props;
+---
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <!-- favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap"
+      rel="stylesheet"
+    />
+
+    <SiteMeta
+      title={title}
+      description={description.substring(0, 100)}
+      url={Astro.site
+        ? `${Astro.site}/${title.toLowerCase().replaceAll(" ", "-")}`
+        : `https://mintworldgame.com/${title
+            .toLowerCase()
+            .replaceAll(" ", "-")}`}
+      image={image}
+    />
+  </head>
+  <body>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+    <style lang="scss">
+      // theme setting
+      :root {
+        --radius-small: 3px;
+        --radius-large: 6px;
+        --gap-default: 2rem;
+        --font-measure: 70ch;
+        --font-family-default: "Silkscreen", sans-serif;
+        --font-family-special: "Silkscreen", sans-serif;
+        // light theme
+        --font-color: var(--neutral-100);
+        --action-color: var(--secondary-100);
+        --background: var(--neutral-900);
+        --primary-background: var(--success-900);
+        --neutral-background: var(--neutral-900);
+      }
+
+      // dark color scheme overrides
+      .darkmode {
+        --font-color: var(--neutral-900);
+        --action-color: var(--secondary-500);
+        --background: var(--neutral-100);
+        --primary-background: var(--primary-100);
+        --neutral-background: var(--neutral-200);
+      }
+
+      // sticky footer on low content pages
+      html,
+      body {
+        height: 100%;
+        overflow-x: hidden;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--background);
+
+        main {
+          flex: 1 0 auto;
+        }
+
+        footer {
+          flex-shrink: 0;
+        }
+      }
+    </style>
+    <script is:inline src="/web3/index.js"></script>
+    <script
+      async
+      defer
+      data-website-id="242f169f-1f95-49f5-97f2-93b517e29f98"
+      src="https://mw-umami.vercel.app/umami.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://www.termsfeed.com/public/cookie-consent/4.1.0/cookie-consent.js"
+      charset="UTF-8"
+    ></script>
+    <script type="text/javascript" charset="UTF-8">
+      document.addEventListener("DOMContentLoaded", function () {
+        cookieconsent.run({
+          notice_banner_type: "simple",
+          consent_type: "express",
+          palette: "light",
+          language: "en",
+          page_load_consent_levels: ["strictly-necessary"],
+          notice_banner_reject_button_hide: false,
+          preferences_center_close_button_hide: false,
+          page_refresh_confirmation_buttons: false,
+          website_name: "MintWorldGame",
+          website_privacy_policy_url: "https://mintworldgame.com/tc",
+        });
+      });
+    </script>
+  </body>
+</html>

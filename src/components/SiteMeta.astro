@@ -1,0 +1,19 @@
+---
+const { title, description, url, image } = Astro.props;
+
+let subtitle =
+  "MintWorld is a web3 based 2D Monster Catcher RPG with blockchain collectibles";
+---
+
+<!-- open graph -->
+<meta property="og:title" content={`${title} - ${subtitle}`} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={url} />
+<meta
+  property="og:image"
+  content={Astro.site ? `${Astro.site}${image}` : image}
+/>
+
+<!-- page title -->
+<title>{title} - {subtitle}</title>

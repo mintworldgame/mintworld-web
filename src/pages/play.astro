@@ -1,0 +1,14 @@
+---
+import DefaultLayout from "../layouts/DefaultLayout.astro";
+import Game from "../components/Entermw";
+---
+
+<DefaultLayout title="Welcome Player!">
+  <section>
+    <section class="container">
+      <div class="flex items-center justify-center">
+        <Game client:load />
+      </div>
+    </section>
+  </section>
+</DefaultLayout>
