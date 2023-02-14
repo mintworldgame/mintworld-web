@@ -11,7 +11,6 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "0xsequence": "^0.43.13",
     "@astrojs/image": "^0.14.0",
     "@astrojs/mdx": "^0.15.2",
     "@astrojs/partytown": "^1.0.3",
@@ -21,10 +20,12 @@
     "@astrojs/tailwind": "^3.0.0",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "0xsequence": "^0.43.13",
     "accessible-astro-components": "^1.6.2",
     "astro-icon": "^0.8.0",
     "astro-robots-txt": "^0.3.11",
     "astro-rome": "^0.1.6",
+    "framer-motion": "^9.0.2",
     "react": "^18.0.0",
     "react-cookie-consent": "^8.0.1",
     "react-dom": "^18.0.0",
