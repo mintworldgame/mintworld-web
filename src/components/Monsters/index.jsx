@@ -10,11 +10,11 @@ const nfts = [{ path: '/img/Watery-web.png', alt: 'Watery' }, { path: '/img/Wind
 const Monsters = () => {
   const [selectedCard, setSelectedCard] = useState(null);
   return (
-    <div class='container'>
+    <div className='container'>
       {/* This is what makes the two animations smoothly transition into eachother */}
       <AnimateSharedLayout type='crossfade'>
-        <div class='grid-cols-6 gap-4 flex flex-col sm:flex-row'>
-          <div class='col-span-6'>
+        <div className='grid-cols-6 gap-4 flex flex-col sm:flex-row'>
+          <div className='col-span-6'>
             <p>
               Claim your free daily Monster NFT via the Mint World Faucet Game. If
               you're lucky you can catch one of the 4 rare shiny monsters. Release
@@ -22,17 +22,17 @@ const Monsters = () => {
               one of the very first MintPlayers to unlock new content
             </p>
             <p>
-              <a href='/play/' class='button color-success mt-8'>
+              <a href='/play/' className='button color-success mt-8'>
                 Start Your Journey
               </a>
             </p>
           </div>
           <div
-            class='grid grid-cols-4 gap-4'
+            className='grid grid-cols-4 gap-4'
           >
             {/* Mapping over the nfts array so you have just one monstercard component that will render for each image in the list */}
             {nfts.map((item, index) => (
-              <div key={item.alt + index} class='col-span-4' onClick={() => setSelectedCard(item)}>
+              <div key={item.alt + index} className='col-span-4' onClick={() => setSelectedCard(item)}>
                 <MonsterCard path={item.path} alt={item.alt} />
               </div>
             ))}

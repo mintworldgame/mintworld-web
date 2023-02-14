@@ -93,7 +93,7 @@ export default function ModalMonsterCard({ path, alt, onClick }) {
         transition={1.5}
       >
         <motion.img
-          class='object-cover h-full w-full'
+          className='object-cover h-full w-full'
           src={path}
           alt={alt}
           loading='lazy'
