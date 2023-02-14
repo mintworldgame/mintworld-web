@@ -20,7 +20,6 @@
     "@astrojs/tailwind": "^3.0.0",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
-    "0xsequence": "^0.43.13",
     "accessible-astro-components": "^1.6.2",
     "astro-icon": "^0.8.0",
     "astro-robots-txt": "^0.3.11",
