@@ -26,7 +26,7 @@ const MonsterCard = ({ path, alt }) => {
   }
   return (
     <motion.div
-      class='col-span-4'
+      className='col-span-4'
       layout
       //important the layout id is what lets she animatedsharedlayout in index now which components to animate together with
       layoutId={'card' + alt}
@@ -53,7 +53,7 @@ const MonsterCard = ({ path, alt }) => {
       animate={controls}
     >
       <motion.img
-        class='object-cover h-full w-full'
+        className='object-cover h-full w-full'
         src={path}
         alt={alt}
         loading='lazy'
