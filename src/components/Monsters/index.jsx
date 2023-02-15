@@ -16,7 +16,7 @@ const Monsters = () => {
         <div className='grid-cols-6 gap-4 flex flex-col sm:flex-row'>
           <div className='col-span-6'>
             <p>
-              Claim your free daily Monster NFT via the Mint World Faucet Game. If
+              Claim your free daily Monster NFT via the MintWorld Faucet Game. If
               you're lucky you can catch one of the 4 rare shiny monsters. Release
               10 common Monsters to receive 1 free MintWorldGame Coin ($MWG) Be
               one of the very first MintPlayers to unlock new content
