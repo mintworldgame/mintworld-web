@@ -13,7 +13,6 @@
   "dependencies": {
     "@astrojs/image": "^0.14.0",
     "@astrojs/mdx": "^0.15.2",
-    "@astrojs/partytown": "^1.0.3",
     "@astrojs/prefetch": "^0.1.1",
     "@astrojs/react": "^2.0.1",
     "@astrojs/sitemap": "^1.0.1",
@@ -21,6 +20,7 @@
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "accessible-astro-components": "^1.6.2",
+    "astro-compress": "^1.1.33",
     "astro-icon": "^0.8.0",
     "astro-robots-txt": "^0.3.11",
     "astro-rome": "^0.1.6",
