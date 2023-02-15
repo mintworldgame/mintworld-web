@@ -29,10 +29,7 @@ import sitemap from "@astrojs/sitemap";
 import robotsTxt from "astro-robots-txt";
 
 // https://astro.build/config
-import compress from "astro-compress";
-
-// https://astro.build/config
 export default defineConfig({
   site: "https://mintworldgame.com",
-  integrations: [tailwind(), react(), prefetch(), rome(), mdx(), image(), sitemap(), robotsTxt(), compress()]
+  integrations: [tailwind(), react(), prefetch(), rome(), mdx(), image(), sitemap(), robotsTxt()]
 });
