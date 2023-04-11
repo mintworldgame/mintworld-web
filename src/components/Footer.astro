@@ -11,6 +11,19 @@ const currentYear = new Date().getFullYear();
         > -
         <a href="/tc/">Terms & Conditions</a>
       </p>
+      <p>
+        <a href="#">
+          <img onclick="logBadgeClick()" id="badge-button" style="width:240px;height:53px" src="https://static.alchemyapi.io/images/marketing/badge.png" alt="Alchemy Supercharged" />
+      </a>
+      </p> 
     </div>
   </section>
+  <script is:inline>
+    const BADGE_ID = 'aff724b3060aadfc';
+    
+    function logBadgeClick() {
+        console.log('Badge clicked');
+    }
+</script>
+<script is:inline type="text/javascript" src="https://static.alchemyapi.io/scripts/badge/alchemy-badge.js"></script>
 </footer>
