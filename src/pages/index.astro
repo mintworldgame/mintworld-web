@@ -1,26 +1,26 @@
 ---
 import DefaultLayout from '../layouts/DefaultLayout.astro';
-import Hero from '../components/Hero.astro';
-import Monsters from '../components/Monsters';
 import Grid from '../components/Grid.astro';
 import Landsale from '../components/Landsale.astro';
 import Awards from '../components/Awards.astro';
+import Hero2 from '../components/Hero2.astro';
+import Monsters from '../components/Monsters.astro';
 ---
 
 <DefaultLayout title='Enter MintWorld'>
   <section>
-    <Hero />
+    <Hero2 />
   </section>
-  <section class='padding-48'>
-    <Monsters client:load />
+  <section class=''>
+    <Monsters />
   </section>
-  <section class='padding-48'>
+  <section class=''>
     <Grid />
   </section>
-  <section class='padding-48'>
+  <section class=''>
     <Landsale />
   </section>
-  <section class='padding-48'>
+  <section class=''>
     <Awards />
   </section>
 </DefaultLayout>
