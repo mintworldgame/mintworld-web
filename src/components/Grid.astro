@@ -1,7 +1,6 @@
 ---
 ---
-
-<div class="container-full bg-no-repeat bg-cover bg-center h-screen w-screen flex flex-col">
+<div class="container-full">
   <div class="container">
     <h2 class="margin-16 bottom">Game Features</h2>
   </div>
@@ -103,6 +102,18 @@
 
 <style>
   .container-full {
-      background-image: url('/img/map.webp');
+    background-image: url('/img/map.webp');
+  }
+
+  @media (max-width: 600px) {
+    .container[data-auto-grid="2"] {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+  @media (min-width: 601px) {
+    .container[data-auto-grid="2"] {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 </style>
