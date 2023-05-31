@@ -5,7 +5,7 @@ import MonsterCard from './MonsterCard.jsx'
 import ModalMonsterCard from './ModalMonsterCard.jsx'
 
 
-const nfts = [{ path: '/img/Watery-web.png', alt: 'Watery' }, { path: '/img/Windry-web.png', alt: 'Windry' }, { path: '/img/Octopus-web.png', alt: 'Octopus' }, { path: '/img/Wingron-web.png', alt: 'Wingron' }, { path: '/img/Stoneman-web.png', alt: 'Stoneman' }, { path: '/img/Lavagron-web.png', alt: 'Lavagron' }]
+const nfts = [{ path: '/img/Watery-web.webp', alt: 'Watery' }, { path: '/img/Windry-web.webp', alt: 'Windry' }, { path: '/img/Octopus-web.webp', alt: 'Octopus' }, { path: '/img/Wingron-web.webp', alt: 'Wingron' }, { path: '/img/Stoneman-web.webp', alt: 'Stoneman' }, { path: '/img/Lavagron-web.webp', alt: 'Lavagron' }]
 
 const Monsters = () => {
   const [selectedCard, setSelectedCard] = useState(null);
