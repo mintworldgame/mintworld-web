@@ -12,9 +12,6 @@ import prefetch from "@astrojs/prefetch";
 import react from "@astrojs/react";
 
 // https://astro.build/config
-import rome from "astro-rome";
-
-// https://astro.build/config
 
 // https://astro.build/config
 import mdx from "@astrojs/mdx";
@@ -31,5 +28,14 @@ import robotsTxt from "astro-robots-txt";
 // https://astro.build/config
 export default defineConfig({
   site: "https://mintworldgame.com",
-  integrations: [tailwind(), react(), prefetch(), rome(), mdx(), image(), sitemap(), robotsTxt()]
+  integrations: [
+    tailwind(),
+    react(),
+    prefetch(),
+    rome(),
+    mdx(),
+    image(),
+    sitemap(),
+    robotsTxt(),
+  ],
 });
