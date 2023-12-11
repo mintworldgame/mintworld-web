@@ -22,7 +22,6 @@
     "accessible-astro-components": "^1.6.2",
     "astro-icon": "^0.8.0",
     "astro-robots-txt": "^0.3.11",
-    "astro-rome": "^0.1.6",
     "framer-motion": "^9.0.2",
     "react": "^18.0.0",
     "react-cookie-consent": "^8.0.1",
