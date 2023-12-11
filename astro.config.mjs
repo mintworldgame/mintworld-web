@@ -32,7 +32,6 @@ export default defineConfig({
     tailwind(),
     react(),
     prefetch(),
-    rome(),
     mdx(),
     image(),
     sitemap(),
